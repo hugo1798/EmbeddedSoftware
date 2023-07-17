@@ -51,17 +51,18 @@
  * @return The value returned will be an unsigned char called med_val, which will
  * used later in the statistics printing
  */
-unsigned char find_median(unsigned char pointer_array, unsigned int size_array){
-    unsigned char *val, *med_val;
+
+unsigned char find_median(unsigned char array1[], unsigned int size_array){
+    unsigned char val, med_val;
     unsigned char arrayaux[40] = {};
     unsigned char valprev;
     unsigned char i1 = 1;
     unsigned char i2 = 1;
-    
+
     valprev = 0;
-    
-    for(int i = 0; i < 40; i++){
-        val = &address_test[i];
+
+    for(int i = 0; i < size_array; i++){
+        val = array1[i];
         if(val>valprev){
             if(i == 0){
                 arrayaux[i] = val;
@@ -124,10 +125,10 @@ unsigned char find_median(unsigned char pointer_array, unsigned int size_array){
         }
     }
     if((size_array % 2) != 0){
-         med_val = &address_test[size_array / 2];
+         med_val = array1[size_array / 2];
     }
     else{
-        med_val = (&address_test[size_array / 2] + &address_test[(size_array / 2) - 1]) / 2;
+        med_val = (array1[size_array / 2] + array1[(size_array / 2) - 1]) / 2;
     }
     return med_val;
 }
@@ -148,15 +149,15 @@ unsigned char find_median(unsigned char pointer_array, unsigned int size_array){
  * @return The value returned will be an unsigned char called mean_val, which will be used
  * later in the statistics printing
  */
-unsigned char find_mean(unsigned char pointer_array, unsigned int size_array){
-    unsigned char *value;
+unsigned char find_mean(unsigned char array1[], unsigned int size_array){
+    unsigned char value;
     // In this case we cannot use an unsigned char since the range for this variable
     // is not enough for us to do the right calculations
     unsigned int sum_val = 0;
     unsigned int mean_val = 0;
     for (int i = 0; i < size_array; i++){
-        value = &address_test[i];
-        sum_val += *value;
+        value = array1[i];
+        sum_val += value;
     }
     mean_val = sum_val / size_array;
     return mean_val;
@@ -177,13 +178,13 @@ unsigned char find_mean(unsigned char pointer_array, unsigned int size_array){
  * @return The value returned will be an unsigned char called max_val, which will be used
  * later in the statistics printing
  */
-unsigned char find_maximum(unsigned char address_test, unsigned int size_array){
-    unsigned char *value;
+unsigned char find_maximum(unsigned char array1[], unsigned int size_array){
+    unsigned char value;
     unsigned char max_val = 0;
     for (int i = 0; i < size_array; i++){
-        value = &address_test[i];
-        if(*value > max_val){
-            max_val = *value;
+        value = array1[i];
+        if(value > max_val){
+            max_val = value;
         }
     }
     return max_val;
@@ -204,13 +205,13 @@ unsigned char find_maximum(unsigned char address_test, unsigned int size_array){
  * @return The value returned will be an unsigned char called min_val, which will be used
  * later in the statistics printing
  */
-unsigned char find_minimum(unsigned char address_test, unsigned int size_array){
-    unsigned char *value;
+unsigned char find_minimum(unsigned char array1[], unsigned int size_array){
+    unsigned char value;
     unsigned char min_val = 5000;
     for (int i = 0; i < size_array; i++){
-        value = &address_test[i];
-        if(*value < min_val){
-            min_val = *value;
+        value = array1[i];
+        if(value < min_val){
+            min_val = value;
         }
     }
     return min_val;
@@ -231,8 +232,9 @@ unsigned char find_minimum(unsigned char address_test, unsigned int size_array){
  *
  * @return This function returns an unsigned char called arrayaux which contains the sorted array
  */
-unsigned char sort_array(unsigned char address_test, unsigned int size_array){
-    unsigned char *val;
+
+unsigned char sort_array(unsigned char array1[], unsigned int size_array){
+    unsigned char val;
     unsigned char arrayaux[40] = {};
     unsigned char valprev;
     unsigned char i1 = 1;
@@ -241,7 +243,7 @@ unsigned char sort_array(unsigned char address_test, unsigned int size_array){
     valprev = 0;
     
     for(int i = 0; i < 40; i++){
-        val = &address_test[i];
+        val = array1[i];
         if(val>valprev){
             if(i == 0){
                 arrayaux[i] = val;
@@ -303,7 +305,7 @@ unsigned char sort_array(unsigned char address_test, unsigned int size_array){
             valprev = val;
         }
     }
-    return arrayaux;
+    return arrayaux[40];
 }
 /**
  * @brief Function used to print the maximum, minimum, mean, and median
@@ -320,7 +322,7 @@ unsigned char sort_array(unsigned char address_test, unsigned int size_array){
  * @return This function doesnt return any important value, since its a printing function
  */
 unsigned char print_statistics(unsigned char minval, unsigned char maxval, unsigned char meanval, unsigned char medianval){
-    printf("The statistics for this array are");
+    printf("The statistics for this array are\n");
     printf("Minimum val %u\n", minval);
     printf("Maximum val %u\n", maxval);
     printf("Mean val %u\n", meanval);
@@ -340,11 +342,11 @@ unsigned char print_statistics(unsigned char minval, unsigned char maxval, unsig
  *
  * @return This function doesnt return any important value, since its a printing function
  */
-unsigned char print_array(unsigned char address_test, unsigned int size_array){
+unsigned char print_array(unsigned char *pointer_array, unsigned int size_array){
     unsigned char *value;
-    printf("The values inside the array are");
+    printf("The values inside the array are\n");
     for (int i = 0; i < size_array; i++){
-        value = &address_test[i];
+        value = &pointer_array[i];
         printf("%u\n", *value);
     }
     return 0;
