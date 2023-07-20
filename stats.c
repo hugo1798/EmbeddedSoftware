@@ -33,10 +33,6 @@ void main() {
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
   /* Other Variable Declarations Go Here */
-  /*
-   We need to make the conversion of the test to a pointer, which will give us 
-   the address of the variable test
-  */
   unsigned int size = 40;
   /* Statistics and Printing Functions Go Here */
   unsigned char med_val = find_median(test, size);
@@ -44,11 +40,7 @@ void main() {
   unsigned char val_max = find_maximum(test, size);
   unsigned char val_min = find_minimum(test, size);
   unsigned char arrayprint = print_array(test, size);
-  unsigned char statisticsprint = print_statistics(val_min, val_max, val_mean, med_val);/*
-  printf("%d\n", val_max);
-  printf("%d\n", val_mean);
-  printf("%d\n", med_val);
-  printf("%d\n", val_min);*/
+  unsigned char statisticsprint = print_statistics(val_min, val_max, val_mean, med_val);
   return;
 }
 
